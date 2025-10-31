@@ -1,0 +1,80 @@
+# Sports2000 Database Schema Summary
+
+This is a summary of the sports2000 database schema. The full schema is available in sports2000.df.
+
+## Key Tables
+
+### Customer
+- **CustNum** (INTEGER) - Primary Key
+- **Name** (CHARACTER) - Customer name
+- **Address** (CHARACTER) - Street address
+- **City** (CHARACTER) - City
+- **State** (CHARACTER) - State
+- **PostalCode** (CHARACTER) - Postal code
+- **Contact** (CHARACTER) - Contact person
+- **Phone** (CHARACTER) - Phone number
+- **SalesRep** (CHARACTER) - Sales representative
+- **CreditLimit** (DECIMAL) - Credit limit
+- **Balance** (DECIMAL) - Current balance
+- **Terms** (CHARACTER) - Payment terms
+- **DiscountRate** (DECIMAL) - Discount rate
+- **Comments** (CHARACTER) - Comments
+- **FaxNum** (CHARACTER) - Fax number
+- **EmailAddress** (CHARACTER) - Email address
+
+### Item
+- **ItemNum** (INTEGER) - Primary Key
+- **ItemName** (CHARACTER) - Item name
+- **Price** (DECIMAL) - Item price
+- **OnHand** (INTEGER) - Quantity on hand
+- **Allocated** (INTEGER) - Allocated quantity
+- **ReOrder** (INTEGER) - Reorder level
+- **OnOrder** (INTEGER) - Quantity on order
+- **CatPage** (INTEGER) - Catalog page
+- **CatDescription** (CHARACTER) - Catalog description
+- **Category1** (CHARACTER) - Primary category
+- **Category2** (CHARACTER) - Secondary category
+- **Special** (CHARACTER) - Special offer
+- **Weight** (DECIMAL) - Item weight
+- **Minqty** (INTEGER) - Minimum order quantity
+
+### Order
+- **OrderNum** (INTEGER) - Primary Key
+- **CustNum** (INTEGER) - Foreign Key to Customer
+- **OrderDate** (DATE) - Order date
+- **ShipDate** (DATE) - Ship date
+- **PromiseDate** (DATE) - Promise date
+- **Carrier** (CHARACTER) - Shipping carrier
+- **Instructions** (CHARACTER) - Shipping instructions
+- **PO** (CHARACTER) - Purchase order number
+- **Terms** (CHARACTER) - Payment terms
+- **SalesRep** (CHARACTER) - Sales representative
+- **BillToID** (INTEGER) - Billing address ID
+- **ShipToID** (INTEGER) - Shipping address ID
+- **OrderStatus** (CHARACTER) - Order status
+- **WarehouseNum** (INTEGER) - Warehouse number
+- **Creditcard** (CHARACTER) - Credit card type
+
+### OrderLine
+- **OrderNum** (INTEGER) - Foreign Key to Order
+- **LineNum** (INTEGER) - Line number
+- **ItemNum** (INTEGER) - Foreign Key to Item
+- **Price** (DECIMAL) - Line item price
+- **Qty** (INTEGER) - Quantity ordered
+- **Discount** (INTEGER) - Discount percentage
+- **ExtendedPrice** (DECIMAL) - Extended price
+- **OrderLineStatus** (CHARACTER) - Line status
+
+## Sequences
+
+- **NextCustNum**: Starting at 1000, increment by 5
+- **NextItemNum**: Starting at 100, increment by 10
+- **NextOrdNum**: Starting at 1000, increment by 5
+- **NextInvNum**: Starting at 1000, increment by 1
+
+## Notes
+
+- The database uses various areas for organizing tables (Employee, Order Entry, Inventory, etc.)
+- Many tables have validation expressions and help text defined
+- Foreign key relationships are enforced through validation expressions
+- The full schema definition is available in dump/sports2000.df
