@@ -1,0 +1,43 @@
+# Sports2000 Database Schema Summary
+
+This is a summary of the sports2000 database schema used in this project.
+
+## Key Tables
+
+### Customer
+- CustNum (INTEGER) - Primary Key
+- Name (CHARACTER)
+- Address (CHARACTER)
+- City (CHARACTER)
+- State (CHARACTER)
+- PostalCode (CHARACTER)
+- Contact (CHARACTER)
+- Phone (CHARACTER)
+- SalesRep (CHARACTER)
+- CreditLimit (DECIMAL)
+- Balance (DECIMAL)
+- Terms (CHARACTER)
+- DiscountRate (DECIMAL)
+- Comments (CHARACTER)
+- FaxNum (CHARACTER)
+- EmailAddress (CHARACTER)
+
+### Item
+- ItemNum (INTEGER) - Primary Key
+- ItemName (CHARACTER)
+- CatPage (INTEGER)
+- Price (DECIMAL)
+- CatDescription (CHARACTER)
+- OnHand (INTEGER)
+- Allocated (INTEGER)
+- ReOrder (INTEGER)
+- OnOrder (INTEGER)
+- Category1 (CHARACTER)
+- Category2 (CHARACTER)
+- Special (CHARACTER)
+- Weight (DECIMAL)
+- MinQty (INTEGER)
+
+## Full Schema
+
+For the complete database schema definition, see the dump/sports2000.df file in the repository.
