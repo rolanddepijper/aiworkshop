@@ -1,6 +1,3 @@
-USING business.ItemEntity.
-USING business.EntityFactory.
-
 &ANALYZE-SUSPEND _VERSION-NUMBER AB_v10r12 GUI
 &ANALYZE-RESUME
 /* Connected Databases 
@@ -27,6 +24,9 @@ USING business.EntityFactory.
 ------------------------------------------------------------------------*/
 /*          This .W file was created with the Progress AppBuilder.      */
 /*----------------------------------------------------------------------*/
+
+USING business.ItemEntity FROM PROPATH.
+USING business.EntityFactory FROM PROPATH.
 
 CREATE WIDGET-POOL.
 
