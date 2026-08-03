@@ -1,0 +1,30 @@
+Sports2000 Database Schema Summary
+====================================
+
+This is a condensed summary of the sports2000 database schema used by this project.
+The full schema definition (.df) is maintained in the source ProjectGengar repository
+at dump/sports2000.df and is used via the "sp2k" dbConnection in openedge-project.json.
+
+Sequences:
+- NextCustNum, NextInvNum, NextOrdNum, NextItemNum, NextRefNum,
+  NextVisitor, NextSupplNum, NextLocalDefNum, NextWareNum,
+  NextBinNum, NextPONum, NextEmpNum, NextInvTransNum
+
+Key Tables (used by this project):
+- Customer (Area: Cust_Data)
+  CustNum (INTEGER, PK), Name, Address, Address2, City, State, Country,
+  Phone, Contact, SalesRep, Comments, CreditLimit (DECIMAL),
+  Balance (DECIMAL), Terms, Discount, PostalCode, Fax
+
+- Item (Area: Inventory)
+  ItemNum (INTEGER, PK), ItemName, Price (DECIMAL), OnHand (INTEGER),
+  Allocated, Reorder, OnOrder, CatPage, CatDescription,
+  Category1, Category2, Special, Weight, MinWeight
+
+Other Tables (not used directly by this project's business entities, present
+in the full schema): Benefits, BillTo, Bin, Order, OrderLine, Warehouse,
+Salesrep, Supplier, State, Employee, and others.
+
+For the complete, authoritative schema definition, refer to
+dump/sports2000.df in the source project (ProjectGengar), which is loaded
+via PCT's <sports2000> Ant task in build.xml.
