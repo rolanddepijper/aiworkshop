@@ -1,6 +1,3 @@
-USING business.ItemEntity.
-USING business.EntityFactory.
-
 &ANALYZE-SUSPEND _VERSION-NUMBER AB_v10r12 GUI
 &ANALYZE-RESUME
 /* Connected Databases 
@@ -38,8 +35,6 @@ CREATE WIDGET-POOL.
 
 /* ***************************  Definitions  ************************** */
 
-{business/ItemDataset.i}
-
 /* Parameters Definitions ---                                           */
 
 /* Local Variable Definitions ---                                       */
@@ -59,14 +54,13 @@ CREATE WIDGET-POOL.
 &Scoped-define FRAME-NAME DEFAULT-FRAME
 
 /* Internal Tables (found by Frame, Query & Browse Queries)             */
-/* Internal Tables (found by Frame, Query & Browse Queries)             */
-&Scoped-define INTERNAL-TABLES 
+&Scoped-define INTERNAL-TABLES Item
 
 /* Definitions for FRAME DEFAULT-FRAME                                  */
-&Scoped-define QUERY-STRING-DEFAULT-FRAME 
-&Scoped-define OPEN-QUERY-DEFAULT-FRAME 
-&Scoped-define TABLES-IN-QUERY-DEFAULT-FRAME 
-&Scoped-define FIRST-TABLE-IN-QUERY-DEFAULT-FRAME
+&Scoped-define QUERY-STRING-DEFAULT-FRAME FOR EACH Item SHARE-LOCK
+&Scoped-define OPEN-QUERY-DEFAULT-FRAME OPEN QUERY DEFAULT-FRAME FOR EACH Item SHARE-LOCK.
+&Scoped-define TABLES-IN-QUERY-DEFAULT-FRAME Item
+&Scoped-define FIRST-TABLE-IN-QUERY-DEFAULT-FRAME Item
 
 
 /* Standard List Definitions                                            */
@@ -109,7 +103,7 @@ DEFINE VARIABLE FILL-IN_Price AS DECIMAL FORMAT "->,>>>,>>9.99" INITIAL 0
 /* Query definitions                                                    */
 &ANALYZE-SUSPEND
 DEFINE QUERY DEFAULT-FRAME FOR 
-      ttItem SCROLLING.
+      Item SCROLLING.
 &ANALYZE-RESUME
 
 /* ************************  Frame Definitions  *********************** */
@@ -183,7 +177,7 @@ THEN C-Win:HIDDEN = no.
 
 &ANALYZE-SUSPEND _QUERY-BLOCK FRAME DEFAULT-FRAME
 /* Query rebuild information for FRAME DEFAULT-FRAME
-     _TblList          = "Temp-Tables.ttItem"
+     _TblList          = "sports.Item"
      _Query            is OPENED
 */  /* FRAME DEFAULT-FRAME */
 &ANALYZE-RESUME
@@ -219,6 +213,57 @@ END.
 /* _UIB-CODE-BLOCK-END */
 &ANALYZE-RESUME
 
+
+&Scoped-define SELF-NAME BUTTON-3
+&ANALYZE-SUSPEND _UIB-CODE-BLOCK _CONTROL BUTTON-3 C-Win
+ON CHOOSE OF BUTTON-3 IN FRAME DEFAULT-FRAME /* Get Item */
+DO:
+  ASSIGN FILL-IN_ItemNum. 
+  FIND FIRST Item WHERE Item.ItemNum = INTEGER(FILL-IN_ItemNum) NO-LOCK NO-ERROR.
+  IF AVAILABLE Item THEN
+  DO:
+     FILL-IN_Price = Item.Price.
+     DISPLAY FILL-IN_Price WITH FRAME {&frame-name}.
+  END.
+  ELSE
+     MESSAGE 'Item not found' VIEW-AS ALERT-BOX.
+
+END.
+
+/* _UIB-CODE-BLOCK-END */
+&ANALYZE-RESUME
+
+
+&Scoped-define SELF-NAME BUTTON-4
+&ANALYZE-SUSPEND _UIB-CODE-BLOCK _CONTROL BUTTON-4 C-Win
+ON CHOOSE OF BUTTON-4 IN FRAME DEFAULT-FRAME /* Save */
+DO:
+  VAR DECIMAL dTotal.
+  FIND FIRST Item WHERE Item.ItemNum = INTEGER(FILL-IN_ItemNum) EXCLUSIVE-LOCK NO-ERROR.
+  IF AVAILABLE Item THEN
+  DO:
+     ASSIGN FILL-IN_Price.
+     IF FILL-IN_Price = 0 THEN
+     DO:
+         MESSAGE 'Price cannot be empty' VIEW-AS ALERT-BOX.
+         RETURN NO-APPLY. 
+     END.
+     dTotal = Item.OnHand * FILL-IN_Price.
+     IF dTotal > 6000 THEN
+     DO:
+         MESSAGE 'Total value onhand will be ' dTotal 
+                 ', should not be larger than 6000' VIEW-AS ALERT-BOX.
+         RETURN NO-APPLY.
+     END.
+     Item.Price = FILL-IN_Price.    
+  END.
+  ELSE
+     MESSAGE 'Item not found' VIEW-AS ALERT-BOX.
+
+END.
+
+/* _UIB-CODE-BLOCK-END */
+&ANALYZE-RESUME
 
 
 &UNDEFINE SELF-NAME

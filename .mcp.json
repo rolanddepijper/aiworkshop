@@ -1,0 +1,15 @@
+{
+	"mcpServers": {
+		"openedge-abl-mcp-server": {
+			"command": "python",
+			"args": [
+				"C:\\Users\\rolan\\.windsurf\\extensions\\progress-software.progress-openedge-mcp-connector-abl-1.9.5\\resources\\mcp-proxy.py",
+				"https://openedge.data.progress.cloud/openedgemcp/connector4abl/mcp",
+				"pZlF59lSO2koRV3PPbPPig=="
+			],
+			"env": {
+				"PDC_ACCESS_TOKEN": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoicnB5QHByb2dyZXNzLmNvbSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWVpZGVudGlmaWVyIjoiNmZkNWZhOWQtNzM0NC00YzI4LWE5NDYtNDBmZjAxNjI2Njc3IiwiQXNwTmV0LklkZW50aXR5LlNlY3VyaXR5U3RhbXAiOiJUWlAyNlJDQjdBS1ZCTU5DMldTRlRKRkdPM0xWU0RFVCIsIm5iZiI6IjE3ODU3NTUzOTYiLCJleHAiOiIxNzg1NzU4OTk2IiwianRpIjoiNGQwZjgzMzItZmMwYS00NTQxLWJjM2ItYmUyNzMxNTc2NDFhIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiVGVuYW50IENvLUFkbWluaXN0cmF0b3IifQ.HSdWtRiHn-7-fP2esBdk_gItRuyKWW4Z_CIRjujX_xk"
+			}
+		}
+	}
+}
